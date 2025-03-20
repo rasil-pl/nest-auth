@@ -1,0 +1,11 @@
+### Signup User
+POST http://localhost:8000/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "Rasil",
+  "lastName": "Maharjan",
+  "email": "rasil@yopmail.com",
+  "password": "Rasil@123"
+}
+
