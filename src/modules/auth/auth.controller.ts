@@ -62,8 +62,11 @@ export class AuthController {
     @Body() loginUserDto: LoginUserDto,
     @Response() res: ResponseType,
   ) {
-    const { accessToken } = await this.authService.loginUser(loginUserDto, res);
-    return res.status(HttpStatus.OK).json({ accessToken });
+    const { accessToken, user } = await this.authService.loginUser(
+      loginUserDto,
+      res,
+    );
+    return res.status(HttpStatus.OK).json({ accessToken, user });
   }
 
   @Post('refresh')
@@ -99,5 +102,6 @@ export class AuthController {
     @Response() res: ResponseType,
   ) {
     await this.authService.logoutUser(currentUser, res);
+    return res.sendStatus(HttpStatus.NO_CONTENT);
   }
 }

@@ -39,14 +39,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(
     new ClassSerializerInterceptor(app.get(Reflector), {
       strategy: 'excludeAll',
-      excludeExtraneousValues: true,
-      excludePrefixes: ['_'],
+      // excludeExtraneousValues: true,
+      // excludePrefixes: ['_'],
     }),
   );
 
   app.use(cookieParser());
   app.enableCors({
-    methods: ['GET', 'POST', 'PUT', 'PATCH'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
     origin: true,
   });

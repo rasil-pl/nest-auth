@@ -46,7 +46,11 @@ export class AuthService {
       sub: user.uuid,
       role: user.role,
     } satisfies JwtPayload;
-    return await this.issueTokensAndSetRefreshCookie(payload, res);
+    const tokens = await this.issueTokensAndSetRefreshCookie(payload, res);
+    return {
+      ...tokens,
+      user: payload,
+    };
   }
 
   async refreshTokenForUser(
@@ -68,8 +72,12 @@ export class AuthService {
   }
 
   async logoutUser(currentUser: RequestCurrentUser, res: Response) {
-    this.refreshTokenService.expireCookie(res);
-    await this.refreshTokenService.remove(currentUser.id);
+    try {
+      this.refreshTokenService.expireCookie(res);
+      await this.refreshTokenService.remove(currentUser.id);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   private async issueTokensAndSetRefreshCookie(

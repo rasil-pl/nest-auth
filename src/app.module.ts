@@ -6,19 +6,23 @@ import { AppService } from './app.service';
 import { config } from './config';
 import { LoggerMiddleware } from './logger';
 import { AuthModule } from './modules/auth/auth.module';
-import { AuthzModule } from './modules/authz/authz.module';
-import { ProjectModule } from './modules/project/project.module';
-import { TasksModule } from './modules/tasks/tasks.module';
+import { CartModule } from './modules/cart/cart.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { FilesModule } from './modules/files/files.module';
+import { ProductsModule } from './modules/products/products.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(config.db.connectionString),
+    MongooseModule.forRoot(config.db.connectionString, {
+      autoIndex: true,
+    }),
     UsersModule,
     AuthModule,
-    TasksModule,
-    ProjectModule,
-    AuthzModule,
+    FilesModule,
+    CategoriesModule,
+    ProductsModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

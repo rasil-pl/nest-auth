@@ -22,4 +22,9 @@ export const config = {
     issuerUrl: process.env.AUTH0_ISSUER_URL,
     audience: process.env.AUTH0_AUDIENCE,
   },
+  cloudindary: {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME || '',
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET || '',
+  },
 };
